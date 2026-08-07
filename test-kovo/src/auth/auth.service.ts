@@ -39,7 +39,7 @@ export class AuthService {
     });
 
     const { password: _, ...userWithoutPassword } = user;
-    return user;
+    return userWithoutPassword;
   }
 
   async validateUser(email: string, password: string) {
@@ -55,28 +55,27 @@ export class AuthService {
     if (!isMatch) {
       throw new UnauthorizedException('Email ou mot de passe incorrect.');
     }
+
     const { password: _, ...userWithoutPassword } = user;
     return userWithoutPassword;
   }
 
-  login(user: {
-    id: string;
-    name: string;
-    email: string;
-    password: string;
-  }): Promise<{
-    access_token: string;
-  }> {
+  async login(user: { id: string; name: string; email: string }) {
     const payload = {
+      sub: user.id,
       id: user.id,
       email: user.email,
-      password: user.password,
       name: user.name,
     };
+
+    const jwtSecret =
+      process.env.JWT_SECRET || 'XOICIvHF0bKjHMx9yNYGvGSMvRKJUK7Guq89V0Rx9T0=';
+
     const token = this.jwtService.sign(payload, {
-      secret: process.env.JWT_SECRET,
+      secret: jwtSecret,
       expiresIn: '2d',
     });
+
     return {
       access_token: token,
     };
