@@ -7,6 +7,6 @@ Conception d'une API REST
 **Sécurité :** JWT (JSON Web Tokens)
 **Documentation :** Swagger pour la documentation de l'API
 
-**Route de la documentation Swagger :** [http://localhost:3000/api](http://localhost:3000/api)
+**Route de la documentation Swagger :** [https://test-kov.onrender.com/api](https://test-kov.onrender.com/api)
 
 
