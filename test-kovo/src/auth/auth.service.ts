@@ -68,8 +68,7 @@ export class AuthService {
       name: user.name,
     };
 
-    const jwtSecret =
-      process.env.JWT_SECRET || 'XOICIvHF0bKjHMx9yNYGvGSMvRKJUK7Guq89V0Rx9T0=';
+    const jwtSecret = process.env.JWT_SECRET;
 
     const token = this.jwtService.sign(payload, {
       secret: jwtSecret,
